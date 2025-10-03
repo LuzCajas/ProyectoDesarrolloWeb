@@ -1,0 +1,57 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block contenido %}
+<!-- Banner -->
+<section id="banner" class="style2">
+    <div class="inner">
+        <span class="image">
+            <img src="{% static 'images/pic07.jpg' %}" alt="Imagen Categoría" />
+        </span>
+        <header class="major">
+            <h1>Agregar Categoría</h1>
+        </header>
+    </div>
+</section>
+
+<!-- Main -->
+<div id="main">
+    <section id="one">
+        <div class="inner">
+            <header class="major">
+                <h2>Nueva Categoría</h2>
+            </header>
+            <p>Por favor, llena todos los campos que se muestran a continuación, luego haz click en <b>Guardar</b>.</p>
+
+            <!-- Formulario centrado -->
+            <div class="d-flex justify-content-center">
+                <form method="POST" style="width: 100%; max-width: 600px;">
+                    {% csrf_token %}
+
+                    <!-- Campo Nombre -->
+                    <div class="mb-3">
+                        <label for="{{ form.nombre.id_for_label }}" class="form-label">Nombre</label>
+                        {{ form.nombre }}
+                    </div>
+
+                    <!-- Campo Descripción -->
+                    <div class="mb-3">
+                        <label for="{{ form.descripcion.id_for_label }}" class="form-label">Descripción</label>
+                        {{ form.descripcion }}
+                    </div>
+
+                    <div class="mb-3">
+                        <h2> </h2>
+                        <button type="submit" class="btn btn-primary w-100">Guardar</button>
+                    </div>
+                    <div class="d-flex justify-content-center mt-3">
+                        <h2> </h2>
+                        <a href="{% url 'home:homeapp' %}" class="btn btn-sm btn-warning">Cancelar</a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </section>
+</div>
+{% endblock %}
+
