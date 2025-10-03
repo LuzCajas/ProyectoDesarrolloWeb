@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from django.views.generic import TemplateView, CreateView
+from django.views.generic import TemplateView, CreateView, UpdateView
 from Apps.modulos.models import Categoria
 from django.urls import reverse_lazy
 from .forms import CategoriaForm
@@ -17,4 +17,10 @@ class CrearCategoria(CreateView):
     template_name = 'crear_categoria.html'
     form_class = CategoriaForm
     success_url = reverse_lazy('home:homeapp')
+
+class EditarCategoria(UpdateView):
+    template_name = 'editar_categoria.html'
+    form_class = CategoriaForm
+    success_url = reverse_lazy('home:homeapp')
+    model = Categoria
 

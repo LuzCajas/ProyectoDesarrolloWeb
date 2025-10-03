@@ -1,5 +1,5 @@
 from django import forms
-from Apps.modulos.models import Categoria
+from Apps.modulos.models import Categoria, Producto
 
 class CategoriaForm(forms.ModelForm):
     class Meta:
@@ -10,8 +10,9 @@ class CategoriaForm(forms.ModelForm):
             'descripcion': forms.Textarea(attrs={'class': 'form-control', 'placeholder': 'Descripción de la categoría', 'rows': 3}),
         }
 
-class ProductoForm(forms.Form):
+class ProductoForm(forms.ModelForm):
     class Meta:
+        model = Producto
         fields = ['nombre', 'descripcion', 'precio', 'categoria']
         widgets = {
             'nombre': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Nombre del producto'}),

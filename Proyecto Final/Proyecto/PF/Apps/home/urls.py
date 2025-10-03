@@ -8,6 +8,7 @@ app_name = 'home'
 
 urlpatterns = [
     path('home/', ListarCategorias, name='homeapp'),
-    path('crear_categoria/', views.CrearCategoria.as_view(), name='crear_categoria'),
+    path('crear_categoria/', views.CrearCategoria.as_view(), name='crearcategoriaapp'),
+    path('editar_categoria/<int:pk>/', views.EditarCategoria.as_view(), name='editarcategoriaapp'),
     path('modulos/', ListarProductos, name='modulosapp'),
 ]

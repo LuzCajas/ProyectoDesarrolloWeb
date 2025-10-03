@@ -1,6 +1,11 @@
 from django.shortcuts import render, get_object_or_404
-from django.views.generic import TemplateView, DetailView, UpdateView
+from django.views.generic import TemplateView, DetailView, UpdateView, CreateView
 from .models import Producto, Categoria
+from django.urls import reverse_lazy
+from django.urls import reverse
+from Apps.home.forms import ProductoForm
+
+
 # Create your views here.
 class modulosView(TemplateView):
     template_name = 'modulos.html'
@@ -18,6 +23,22 @@ def ListarProductos(request):
         'productos': productos,
         'categoria': categoria
     })
+
+class CrearProducto(CreateView):
+    template_name = 'crear_producto.html'
+    form_class = ProductoForm
+
+    def get_success_url(self):
+        # self.object es el Producto recién creado
+        categoria_id = self.object.categoria.id  # asumiendo que tu Producto tiene campo 'categoria'
+        # Genera la URL incluyendo el parámetro de categoría
+        return f"{reverse('modulos:modulosapp')}?categoria={categoria_id}"
+
+class EditarProducto(UpdateView):
+    model = Producto
+    template_name = 'editar_producto.html'
+    fields = ['nombre', 'descripcion', 'precio', 'categoria']
+    success_url = reverse_lazy('modulos:detalleapp')
 
 class detalleView(DetailView):
     model = Producto

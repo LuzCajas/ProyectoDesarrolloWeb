@@ -95,10 +95,10 @@
                                 <h2>Acciones</h2>
                                 </header>
                                 <ul class="actions">
-                                    <li><a href="" class="button next">Editar Categoría</a></li>
+                                    <li><a href="{% url 'home:editarcategoriaapp' categoria.id %}" class="button next">Editar Categoría</a></li>
                                 </ul>
 								<ul class="actions">
-                                    <li><a href="" class="button ">+ Agregar Producto</a></li>
+                                    <li><a href="{% url 'modulos:crearproductoapp' %}" class="button ">+ Agregar Producto</a></li>
                                 </ul>
                             </div>
                         </section>
