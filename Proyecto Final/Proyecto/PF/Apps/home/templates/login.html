@@ -1,0 +1,46 @@
+{% extends 'base.html' %}
+{% block contenido %}
+
+<!-- Main Section -->
+<section id="main" class="alt" 
+    style="display: flex; justify-content: center; align-items: center; min-height: 80vh; background: #242943;">
+
+    <div class="inner" 
+        style="max-width: 400px; width: 100%; background: rgba(255, 255, 255, 0.05); padding: 2.5em 2em; border-radius: 10px; 
+               box-shadow: 0 0 25px rgba(0,0,0,0.3); text-align: center;">
+
+        <header class="major" style="margin-bottom: 1.5em;">
+            <h1 style="color: #ffffff; margin: 0; font-size: 1.8em;">Inicio de Sesión</h1>
+            <p style="color: #d0d0d0; margin-top: 0.5em;">Ingrese su usuario y contraseña</p>
+        </header>
+
+        <form method="POST">
+            {% csrf_token %}
+
+            <div class="fields" style="text-align: left;">
+                <div class="field">
+                    <label for="id_username" style="color: #ffffff;">Usuario</label>
+                    <input type="text" name="username" id="id_username" placeholder="Ingrese su usuario" required />
+                </div>
+
+                <div class="field">
+                    <label for="id_password" style="color: #ffffff;">Contraseña</label>
+                    <input type="password" name="password" id="id_password" placeholder="Ingrese su contraseña" required />
+                </div>
+            </div>
+
+            {% if next %}
+                <input type="hidden" name="next" value="{{ next }}">
+            {% endif %}
+
+            <ul class="actions stacked" style="margin-top: 2em;">
+                <li><button type="submit" class="button primary fit">Iniciar Sesión</button></li>
+                <p style="text-align:center; margin-top:10px;">Crear un nuevo usuario:</p>
+                <li><a href="{% url 'home:registroapp' %}" class="button fit">Registrarse</a></li>
+            </ul>
+        </form>
+    </div>
+</section>
+
+{% endblock %}
+

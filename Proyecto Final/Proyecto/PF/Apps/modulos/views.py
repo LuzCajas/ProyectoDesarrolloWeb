@@ -38,7 +38,12 @@ class EditarProducto(UpdateView):
     model = Producto
     template_name = 'editar_producto.html'
     fields = ['nombre', 'descripcion', 'precio', 'categoria']
-    success_url = reverse_lazy('modulos:detalleapp')
+    
+    def get_success_url(self):
+        # self.object es el Producto recién creado
+        categoria_id = self.object.categoria.id  # asumiendo que tu Producto tiene campo 'categoria'
+        # Genera la URL incluyendo el parámetro de categoría
+        return f"{reverse('modulos:modulosapp')}?categoria={categoria_id}"
 
 class detalleView(DetailView):
     model = Producto

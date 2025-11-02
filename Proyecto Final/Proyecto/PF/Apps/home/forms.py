@@ -1,5 +1,7 @@
 from django import forms
 from Apps.modulos.models import Categoria, Producto
+from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth.models import User
 
 class CategoriaForm(forms.ModelForm):
     class Meta:
@@ -20,3 +22,14 @@ class ProductoForm(forms.ModelForm):
             'precio': forms.NumberInput(attrs={'class': 'form-control', 'placeholder': 'Precio del producto'}),
             'categoria': forms.Select(attrs={'class': 'form-control'}),
         }
+
+class RegistroForm(UserCreationForm):
+    first_name = forms.CharField(max_length=140, required=True)
+    last_name = forms.CharField(max_length=140, required=False)
+    email = forms.EmailField(required=True)
+    telefono = forms.CharField(max_length=8, required=False)
+    direccion = forms.CharField(max_length=255, required=False)
+
+    class Meta:
+        model = User
+        fields = ('first_name', 'last_name', 'telefono', 'direccion', 'username', 'email', 'password1', 'password2')

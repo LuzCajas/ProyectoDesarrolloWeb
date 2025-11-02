@@ -1,0 +1,75 @@
+{% extends 'base.html' %}
+{% block contenido %}
+<section id="main" class="alt" 
+    style="display: flex; justify-content: center; align-items: center; min-height: 80vh; background: #242943;">
+
+    <div class="inner" 
+        style="max-width: 400px; width: 100%; background: rgba(255, 255, 255, 0.05); padding: 2.5em 2em; border-radius: 10px; 
+               box-shadow: 0 0 25px rgba(0,0,0,0.3); text-align: center;">
+
+        <header class="major" style="margin-bottom: 1.5em; text-align: center;">
+            <h1 style="color: #ffffff; margin: 0; font-size: 1.8em;">Registro de Usuario</h1>
+            <p style="color: #d0d0d0; margin-top: 0.5em;">Ingrese los siguientes datos</p>
+        </header>
+
+        <form method="POST" class="flex flex-col space-y-4">
+            {% csrf_token %}
+
+            <label for="id_first_name" class="font-semibold mb-1 block">Nombre:</label>
+            <input type="text" name="first_name" id="id_first_name" placeholder="Ingrese su nombre" 
+                   class="w-full p-3 border border-gray-600 rounded-md bg-[color:var(--color-bg-input,#222)] 
+                          text-white focus:outline-none focus:ring-2 focus:ring-blue-500" required>
+
+            <label for="id_last_name" class="font-semibold mb-1 block">Apellido:</label>
+            <input type="text" name="last_name" id="id_last_name" placeholder="Ingrese su apellido" 
+                   class="w-full p-3 border border-gray-600 rounded-md bg-[color:var(--color-bg-input,#222)] 
+                          text-white focus:outline-none focus:ring-2 focus:ring-blue-500" required>
+
+            <label for="id_email" class="font-semibold mb-1 block">Correo electrónico:</label>
+            <input type="email" name="email" id="id_email" placeholder="Ingrese su correo" 
+                   class="w-full p-3 border border-gray-600 rounded-md bg-[color:var(--color-bg-input,#222)] 
+                          text-white focus:outline-none focus:ring-2 focus:ring-blue-500" required>
+
+            <label for="id_telefono" class="font-semibold mb-1 block">Teléfono:</label>
+            <input type="text" name="telefono" id="id_telefono" placeholder="Ingrese su teléfono" 
+                   class="w-full p-3 border border-gray-600 rounded-md bg-[color:var(--color-bg-input,#222)] 
+                          text-white focus:outline-none focus:ring-2 focus:ring-blue-500">
+
+            <label for="id_direccion" class="font-semibold mb-1 block">Dirección:</label>
+            <input type="text" name="direccion" id="id_direccion" placeholder="Ingrese su dirección" 
+                   class="w-full p-3 border border-gray-600 rounded-md bg-[color:var(--color-bg-input,#222)] 
+                          text-white focus:outline-none focus:ring-2 focus:ring-blue-500">
+
+            <label for="id_username" class="font-semibold mb-1 block">Usuario:</label>
+            <input type="text" name="username" id="id_username" placeholder="Ingrese su usuario" 
+                   class="w-full p-3 border border-gray-600 rounded-md bg-[color:var(--color-bg-input,#222)] 
+                          text-white focus:outline-none focus:ring-2 focus:ring-blue-500" required>
+
+            <label for="id_password1" class="font-semibold mb-1 block">Contraseña:</label>
+            <input type="password" name="password1" id="id_password1" placeholder="Ingrese su contraseña" 
+                   class="w-full p-3 border border-gray-600 rounded-md bg-[color:var(--color-bg-input,#222)] 
+                          text-white focus:outline-none focus:ring-2 focus:ring-blue-500" required>
+            <p class="text-xs text-center text-gray-400 mt-1">
+                * La contraseña debe tener al menos 8 caracteres y no puede ser solo numérica.
+            </p>
+
+            <label for="id_password2" class="font-semibold mb-1 block">Confirmar contraseña:</label>
+            <input type="password" name="password2" id="id_password2" placeholder="Confirme su contraseña" 
+                   class="w-full p-3 border border-gray-600 rounded-md bg-[color:var(--color-bg-input,#222)] 
+                          text-white focus:outline-none focus:ring-2 focus:ring-blue-500" required>
+
+            <ul class="actions stacked" style="margin-top: 2em;">
+                <li><button type="submit" class="button primary fit">Registrarse</button></li>
+            </ul>
+
+        </form>
+    </div>
+</div>
+</section>
+{% endblock %}
+
+
+
+
+
+

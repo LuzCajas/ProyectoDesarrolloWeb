@@ -31,8 +31,7 @@
 							<li><a href="elements.html">Acerca De</a></li>
 						</ul>
 						<ul class="actions stacked">
-							<li><a href="#" class="button primary fit">Get Started</a></li>
-							<li><a href="#" class="button fit">Log In</a></li>
+							<li><a href="{% url 'home:loginapp' %}" class="button primary fit">Iniciar Sesión</a></li>
 						</ul>
 					</nav>
 
@@ -83,7 +82,7 @@
 								Ya sea que busques la cartera ideal para completar tu look, una billetera práctica que te acompañe siempre, 
 								o un detalle especial para regalar, aquí tenemos lo que necesitas.</p>
                                 <ul class="actions">
-                                    <li><a href="landing.html" class="button next">Registrate</a></li>
+                                    <li><a href="{% url 'home:registroapp' %}" class="button next">Regstrate</a></li>
                                 </ul>
 								<ul class="actions">
                                     <li><a href="{% url 'home:crearcategoriaapp' %}" class="button ">+ Agregar Categoría</a></li>
