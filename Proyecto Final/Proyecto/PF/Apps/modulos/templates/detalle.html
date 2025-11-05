@@ -13,8 +13,10 @@
 									<span class="image main"><img src="{% static 'images/pic11.jpg' %}" alt="" /></span>
                                     <p>{{ producto.descripcion }}</p>
                                     <h2>Precio: Q{{ producto.precio }}</h2>
-                                    <li><a href="{% url 'modulos:agregar_al_carrito' producto.id %}" class="btn btn-success">Agregar al Carrito</a></li>
-							</div>
+									<ul class="actions">
+										<li><a href="{% url 'modulos:agregar_al_carrito' producto.id %}" class="button next">Agregar al Carrito</a></li>
+									</ul>
+								</div>
 							</section>
 
 					</div>
@@ -27,11 +29,27 @@
 							<h2>Acciones</h2>
 							</header>
 							<ul class="actions">
-								<li><a href="{% url 'modulos:editarproductoapp' producto.id %}" class="button next">Editar Producto</a></li>
+								<li><a href="{% url 'modulos:editarproductoapp' producto.id %}" class="button">Editar Producto</a></li>
 							</ul>
 							<ul class="actions">
-								<li><a href="" class="button ">- Eliminar Producto</a></li>
+								<li>
+									<form id="formEliminar" action="{% url 'modulos:eliminar_producto' producto.id %}" method="post" style="display:inline;">
+										{% csrf_token %}
+										<button type="button" class="button" style="background-color:#d9534f; border:none;"
+												onclick="confirmarEliminacion()">
+											- Eliminar Producto
+										</button>
+									</form>
+								</li>
 							</ul>
+
+							<script>
+							function confirmarEliminacion() {
+								if (confirm("¿Estás seguro de eliminar este producto?")) {
+									document.getElementById('formEliminar').submit();
+								}
+							}
+							</script>
 						</div>
 					</section>
 				{% endif %}

@@ -5,12 +5,17 @@
 <div class="container my-5">
     <div class="card shadow-lg border-0">
 
-        <!-- ✅ Título centrado -->
         <div class="card-header bg-primary text-white text-center">
             <h2 class="text-center mb-4">Carrito de {{ request.user.username }}</h2>
         </div>
         <style>
             h2 {
+                margin-top: 20px; 
+                margin-bottom: 20px;
+                margin-left: 30px;
+                margin-right: 30px;
+            }
+            p {
                 margin-top: 20px; 
                 margin-bottom: 20px;
                 margin-left: 30px;
@@ -67,7 +72,7 @@
             </div>
 
             {% else %}
-                <div class="alert alert-info text-center p-4">
+                <div class="alert alert-info text-center p-4" style="padding: 0 60px;">
                     <i class="bi bi-cart-x fs-1"></i>
                     <p class="mt-3 mb-0 fs-5">Tu carrito está vacío.</p>
                     <ul class="actions mt-3">
