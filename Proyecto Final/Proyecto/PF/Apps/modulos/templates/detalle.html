@@ -55,6 +55,7 @@
 					</div>
 
 				<!-- Three -->
+				{% if request.user.is_staff %}
 					<section id="two">
 						<div class="inner">
 							<header class="major">
@@ -68,6 +69,7 @@
 							</ul>
 						</div>
 					</section>
+				{% endif %}
 
 				<!-- Contact -->
 					<section id="contact">

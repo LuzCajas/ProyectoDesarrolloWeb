@@ -1,9 +1,10 @@
-from django.shortcuts import render, get_object_or_404
+from django.shortcuts import render, get_object_or_404, redirect
 from django.views.generic import TemplateView, DetailView, UpdateView, CreateView
 from .models import Producto, Categoria
 from django.urls import reverse_lazy
 from django.urls import reverse
 from Apps.home.forms import ProductoForm
+from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 
 
 # Create your views here.
@@ -24,26 +25,41 @@ def ListarProductos(request):
         'categoria': categoria
     })
 
-class CrearProducto(CreateView):
+class CrearProducto(LoginRequiredMixin, UserPassesTestMixin, CreateView):
     template_name = 'crear_producto.html'
+    form_class = ProductoForm
+    login_url = '/login/'  # Redirige a tu pantalla de login personalizada
+
+    def get_success_url(self):
+        categoria_id = self.object.categoria.id
+        return f"{reverse('modulos:modulosapp')}?categoria={categoria_id}"
+
+    def handle_no_permission(self):
+        if not self.request.user.is_authenticated:
+            return redirect(self.login_url)
+        return redirect('home:homeapp')
+
+    def test_func(self):
+        return self.request.user.is_staff
+
+
+class EditarProducto(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
+    model = Producto
+    template_name = 'editar_producto.html'
+    login_url = '/login/'  # Redirige a tu pantalla de login personalizada
     form_class = ProductoForm
 
     def get_success_url(self):
-        # self.object es el Producto recién creado
-        categoria_id = self.object.categoria.id  # asumiendo que tu Producto tiene campo 'categoria'
-        # Genera la URL incluyendo el parámetro de categoría
+        categoria_id = self.object.categoria.id
         return f"{reverse('modulos:modulosapp')}?categoria={categoria_id}"
 
-class EditarProducto(UpdateView):
-    model = Producto
-    template_name = 'editar_producto.html'
-    fields = ['nombre', 'descripcion', 'precio', 'categoria']
-    
-    def get_success_url(self):
-        # self.object es el Producto recién creado
-        categoria_id = self.object.categoria.id  # asumiendo que tu Producto tiene campo 'categoria'
-        # Genera la URL incluyendo el parámetro de categoría
-        return f"{reverse('modulos:modulosapp')}?categoria={categoria_id}"
+    def handle_no_permission(self):
+        if not self.request.user.is_authenticated:
+            return redirect(self.login_url)
+        return redirect('home:homeapp')
+
+    def test_func(self):
+        return self.request.user.is_staff
 
 class detalleView(DetailView):
     model = Producto

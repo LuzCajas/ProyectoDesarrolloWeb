@@ -1,40 +1,6 @@
+{% extends 'base.html' %}
 {% load static %}
-<!DOCTYPE HTML>
-<html>
-	<head>
-		<title>DISTEIL</title>
-		<meta charset="utf-8" />
-		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
-		<link rel="stylesheet" href="{% static 'assets/css/main.css' %}" />
-		<noscript><link rel="stylesheet" href="{% static 'assets/css/noscript.css' %}" /></noscript>
-		<link rel="shortcut icon" href="{% static 'images/logo.png' %}" type="">
-	</head>
-	<body class="is-preload">
-
-		<!-- Wrapper -->
-			<div id="wrapper">
-
-				<!-- Header -->
-					<header id="header" class="alt">
-						<a href="{% url 'home:homeapp' %}" class="logo"><strong>DISTEIL</strong> <span>Tienda en Linea</span></a>
-						<nav>
-							<a href="#menu">Menu</a>
-						</nav>
-					</header>
-
-				<!-- Menu -->
-					<nav id="menu">
-						<ul class="links">
-							<li><a href="{% url 'home:homeapp' %}">Home</a></li>
-							<li><a href="{% url 'modulos:modulosapp' %}">Productos</a></li>
-							<li><a href="">Pedidos</a></li>
-							<li><a href="elements.html">Acerca De</a></li>
-						</ul>
-						<ul class="actions stacked">
-							<li><a href="{% url 'home:loginapp' %}" class="button primary fit">Iniciar Sesión</a></li>
-						</ul>
-					</nav>
-
+{% block contenido %}
 				<!-- Banner -->
 					<section id="banner" class="major">
 						<div class="inner">
@@ -52,7 +18,7 @@
 					</section>
 
 				<!-- Main -->
-					<div id="main">
+				<div id="main">
 
                 <!-- One -->
                 <section id="one" class="tiles">
@@ -66,8 +32,8 @@
                             <p>{{ categoria.descripcion|truncatewords:10 }}</p>
                         </header>
                     </article>
-                    {% empty %}
-                    <p>No hay categorías registradas.</p>
+						{% empty %}
+						<p>No hay categorías registradas.</p>
                     {% endfor %}
                 </section>
 
@@ -81,96 +47,25 @@
 								Cada pieza combina elegancia, funcionalidad y un toque único que refleja tu personalidad.
 								Ya sea que busques la cartera ideal para completar tu look, una billetera práctica que te acompañe siempre, 
 								o un detalle especial para regalar, aquí tenemos lo que necesitas.</p>
-                                <ul class="actions">
-                                    <li><a href="{% url 'home:registroapp' %}" class="button next">Regstrate</a></li>
-                                </ul>
-								<ul class="actions">
-                                    <li><a href="{% url 'home:crearcategoriaapp' %}" class="button ">+ Agregar Categoría</a></li>
-                                </ul>
+								{% if request.user.is_authenticated %}
+									<p style="color: white; font-size: 1.1em; margin-top: 1em;">
+										Bienvenid@, {{ request.user.first_name|default:request.user.username }} !
+									</p>
+
+									{% if request.user.is_staff %}
+										<ul class="actions">
+											<li><a href="{% url 'home:crearcategoriaapp' %}" class="button">+ Agregar Categoría</a></li>
+										</ul>
+									{% endif %}
+
+								{% else %}
+									<ul class="actions">
+										<li><a href="{% url 'home:loginapp' %}" class="button next">Iniciar Sesión</a></li>
+									</ul>
+								{% endif %}
                             </div>
                         </section>
 
                 </div>
-
-				<!-- Contact -->
-					<section id="contact">
-						<div class="inner">
-							<section>
-								<form method="post" action="#">
-									<div class="fields">
-										<div class="field half">
-											<label for="name">Name</label>
-											<input type="text" name="name" id="name" />
-										</div>
-										<div class="field half">
-											<label for="email">Email</label>
-											<input type="text" name="email" id="email" />
-										</div>
-										<div class="field">
-											<label for="message">Message</label>
-											<textarea name="message" id="message" rows="6"></textarea>
-										</div>
-									</div>
-									<ul class="actions">
-										<li><input type="submit" value="Send Message" class="primary" /></li>
-										<li><input type="reset" value="Clear" /></li>
-									</ul>
-								</form>
-							</section>
-							<section class="split">
-								<section>
-									<div class="contact-method">
-										<span class="icon solid alt fa-envelope"></span>
-										<h3>Email</h3>
-										<a href="#">information@untitled.tld</a>
-									</div>
-								</section>
-								<section>
-									<div class="contact-method">
-										<span class="icon solid alt fa-phone"></span>
-										<h3>Phone</h3>
-										<span>(000) 000-0000 x12387</span>
-									</div>
-								</section>
-								<section>
-									<div class="contact-method">
-										<span class="icon solid alt fa-home"></span>
-										<h3>Address</h3>
-										<span>1234 Somewhere Road #5432<br />
-										Nashville, TN 00000<br />
-										United States of America</span>
-									</div>
-								</section>
-							</section>
-						</div>
-					</section>
-
-				<!-- Footer -->
-					<footer id="footer">
-						<div class="inner">
-							<ul class="icons">
-								<li><a href="#" class="icon brands alt fa-twitter"><span class="label">Twitter</span></a></li>
-								<li><a href="#" class="icon brands alt fa-facebook-f"><span class="label">Facebook</span></a></li>
-								<li><a href="#" class="icon brands alt fa-instagram"><span class="label">Instagram</span></a></li>
-								<li><a href="#" class="icon brands alt fa-github"><span class="label">GitHub</span></a></li>
-								<li><a href="#" class="icon brands alt fa-linkedin-in"><span class="label">LinkedIn</span></a></li>
-							</ul>
-							<ul class="copyright">
-								<li>&copy; Untitled</li><li>Design: <a href="https://html5up.net">HTML5 UP</a></li>
-							</ul>
-						</div>
-					</footer>
-
-			</div>
-
-		<!-- Scripts -->
-			<script src="{% static 'assets/js/jquery.min.js' %}"></script>
-			<script src="{% static 'assets/js/jquery.scrolly.min.js' %}"></script>
-			<script src="{% static 'assets/js/jquery.scrollex.min.js' %}"></script>
-			<script src="{% static 'assets/js/browser.min.js' %}"></script>
-			<script src="{% static 'assets/js/breakpoints.min.js' %}"></script>
-			<script src="{% static 'assets/js/util.js' %}"></script>
-			<script src="{% static 'assets/js/main.js' %}"></script>
-
-	</body>
 </html>
+{% endblock %}

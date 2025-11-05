@@ -40,13 +40,24 @@
                         {{ form.descripcion }}
                     </div>
 
-                    <!-- Campo Descripción -->
+                    <!-- Campo Precio -->
                     <div class="mb-3">
-                        <label for="{{ form.precio.id_for_label }}" class="form-label">Precio</label>
+                        <label for="{{ form.precio.id_for_label }}" class="form-label" style="color: white;">Precio</label>
                         {{ form.precio }}
                     </div>
 
-                    <!-- Campo Descripción -->
+                    <style>
+                    input[name="precio"] {
+                        color: #ffffff;              /* Texto blanco */
+                        background-color: #303450;   /* Fondo oscuro */
+                        border: 1px solid #303450;
+                        border-radius: 5px;
+                        padding: 10px;
+                        width: 100%;
+                    }
+                    </style>
+
+                    <!-- Campo Categoria -->
                     <div class="mb-3">
                         <label for="{{ form.categoria.id_for_label }}" class="form-label">Categoria</label>
                         {{ form.categoria }}

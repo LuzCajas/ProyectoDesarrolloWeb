@@ -2,11 +2,12 @@
 <!DOCTYPE HTML>
 <html>
 	<head>
-		<title>Landing - Forty by HTML5 UP</title>
+		<title>DISTEIL</title>
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
 		<link rel="stylesheet" href="{% static 'assets/css/main.css' %}" />
 		<noscript><link rel="stylesheet" href="{% static 'assets/css/noscript.css' %}" /></noscript>
+		<link rel="shortcut icon" href="{% static 'images/logo.png' %}" type="">
 	</head>
 	<body class="is-preload">
 
@@ -14,8 +15,7 @@
 			<div id="wrapper">
 
 				<!-- Header -->
-				<!-- Note: The "styleN" class below should match that of the banner element. -->
-					<header id="header" class="alt style2">
+					<header id="header" class="alt">
 						<a href="{% url 'home:homeapp' %}" class="logo"><strong>DISTEIL</strong> <span>Tienda en Linea</span></a>
 						<nav>
 							<a href="#menu">Menu</a>
@@ -23,20 +23,75 @@
 					</header>
 
 				<!-- Menu -->
-					<nav id="menu">
-						<ul class="links">
-							<li><a href="{% url 'home:homeapp' %}">Home</a></li>
-							<li><a href="{% url 'modulos:modulosapp' %}">Productos</a></li>
-							<li><a href="generic.html">Generic</a></li>
-							<li><a href="elements.html">Elements</a></li>
-						</ul>
-						<ul class="actions stacked">
-							<li><a href="#" class="button primary fit">Get Started</a></li>
-							<li><a href="#" class="button fit">Log In</a></li>
-						</ul>
-					</nav>
+				<nav id="menu">
+					<ul class="links">
+						<li><a href="{% url 'home:homeapp' %}">Home</a></li>
+						<li><a href="#one">Productos</a></li>
+						<li><a href="#">Pedidos</a></li>
+						<li><a href="#">Acerca de</a></li>
+					</ul>
+					<ul class="actions stacked">
+						{% if user.is_authenticated %}
+							<li><a href="{% url 'home:logoutapp' %}" class="button primary fit">Cerrar Sesión</a></li>
+						{% else %}
+							<li><a href="{% url 'home:loginapp' %}" class="button primary fit">Iniciar Sesión</a></li>
+						{% endif %}
+					</ul>
+				</nav>
                 {% block contenido%}
                 {% endblock %}
+				<!-- Contact -->
+					<section id="contact">
+						<div class="inner">
+							<section>
+								<form method="post" action="#">
+									<div class="fields">
+										<div class="field half">
+											<label for="name">Name</label>
+											<input type="text" name="name" id="name" />
+										</div>
+										<div class="field half">
+											<label for="email">Email</label>
+											<input type="text" name="email" id="email" />
+										</div>
+										<div class="field">
+											<label for="message">Message</label>
+											<textarea name="message" id="message" rows="6"></textarea>
+										</div>
+									</div>
+									<ul class="actions">
+										<li><input type="submit" value="Send Message" class="primary" /></li>
+										<li><input type="reset" value="Clear" /></li>
+									</ul>
+								</form>
+							</section>
+							<section class="split">
+								<section>
+									<div class="contact-method">
+										<span class="icon solid alt fa-envelope"></span>
+										<h3>Email</h3>
+										<a href="#">information@untitled.tld</a>
+									</div>
+								</section>
+								<section>
+									<div class="contact-method">
+										<span class="icon solid alt fa-phone"></span>
+										<h3>Phone</h3>
+										<span>(000) 000-0000 x12387</span>
+									</div>
+								</section>
+								<section>
+									<div class="contact-method">
+										<span class="icon solid alt fa-home"></span>
+										<h3>Address</h3>
+										<span>1234 Somewhere Road #5432<br />
+										Nashville, TN 00000<br />
+										United States of America</span>
+									</div>
+								</section>
+							</section>
+						</div>
+					</section>
 
 				<!-- Footer -->
 					<footer id="footer">
@@ -55,41 +110,6 @@
 					</footer>
 
 			</div>
-  <!-- footer section -->
-  <footer class="footer_section">
-    <div class="container">
-      <div class="row">
-        <div class="col-md-4 footer-col">
-            <div class="contact-method">
-                <span class="icon solid alt fa-envelope"></span>
-                <h3>Email</h3>
-                <a href="#">information@untitled.tld</a>
-            </div>
-        </div>
-        <div class="col-md-4 footer-col">
-          <div class="footer_detail">
-                <div class="contact-method">
-                    <span class="icon solid alt fa-phone"></span>
-                    <h3>Phone</h3>
-                    <span>(000) 000-0000 x12387</span>
-                </div>
-          </div>
-        </div>
-        <div class="col-md-4 footer-col">
-            <div class="contact-method">
-                <span class="icon solid alt fa-home"></span>
-                <h3>Address</h3>
-                <span>1234 Somewhere Road #5432<br />
-                Nashville, TN 00000<br />
-                United States of America</span>
-            </div>
-        </div>
-      </div>
-      <div class="footer-info">
-      </div>
-    </div>
-  </footer>
-  <!-- footer section -->
 
 		<!-- Scripts -->
 			<script src="{% static 'assets/js/jquery.min.js' %}"></script>
