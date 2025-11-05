@@ -1,0 +1,6 @@
+{% extends 'base.html' %}
+{% block content %}
+    <h2>Pedido confirmado</h2>
+    <p>Gracias por tu compra, {{ pedido.usuario.username }}.</p>
+    <p>Total: Q{{ pedido.total }}</p>
+{% endblock %}

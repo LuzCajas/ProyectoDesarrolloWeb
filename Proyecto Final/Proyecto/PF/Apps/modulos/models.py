@@ -34,11 +34,38 @@ def crear_usuario(sender, instance, created, **kwargs):
 def guardar_usuario(sender, instance, created, **kwargs):
     instance.usuario.save()
 
+# Modelo para el carrito de compras
+    
+class Carrito(models.Model):
+    usuario = models.ForeignKey(User, on_delete=models.CASCADE)
+    creado_en = models.DateTimeField(auto_now_add=True)
+
+    def total(self):
+        return sum(item.subtotal() for item in self.items.all())
+
+    def __str__(self):
+        return f"Carrito de {self.usuario.username}"
+
+class ItemCarrito(models.Model):
+    carrito = models.ForeignKey(Carrito, related_name='items', on_delete=models.CASCADE)
+    producto = models.ForeignKey(Producto, on_delete=models.CASCADE)
+    cantidad = models.PositiveIntegerField(default=1)
+
+    def subtotal(self):
+        return self.producto.precio * self.cantidad
+
 class Pedido(models.Model):
-    usuario = models.ForeignKey('Usuario', on_delete=models.CASCADE)
-    fecha = models.DateTimeField(auto_now_add=True)
+    usuario = models.ForeignKey(User, on_delete=models.CASCADE)
+    creado_en = models.DateTimeField(auto_now_add=True)
     total = models.DecimalField(max_digits=10, decimal_places=2)
+    productos = models.ManyToManyField(Producto, through='DetallePedido')
     efectivo_o_tarjeta = models.Choices('Efectivo', 'Tarjeta')
 
     def __str__(self):
-        return '%s %s %s %s' % (self.usuario, self.fecha, self.total, self.efectivo_o_tarjeta)
+        return f"Pedido #{self.id} de {self.usuario.username}"
+
+class DetallePedido(models.Model):
+    pedido = models.ForeignKey(Pedido, on_delete=models.CASCADE)
+    producto = models.ForeignKey(Producto, on_delete=models.CASCADE)
+    cantidad = models.PositiveIntegerField()
+    subtotal = models.DecimalField(max_digits=10, decimal_places=2)

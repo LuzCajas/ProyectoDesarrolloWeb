@@ -27,8 +27,8 @@
 					<ul class="links">
 						<li><a href="{% url 'home:homeapp' %}">Home</a></li>
 						<li><a href="#one">Productos</a></li>
-						<li><a href="#">Pedidos</a></li>
-						<li><a href="#">Acerca de</a></li>
+						<li><a href="{% url 'modulos:ver_carrito'%}">Carrito de Compras</a></li>
+						<li><a href="#">Historial</a></li>
 					</ul>
 					<ul class="actions stacked">
 						{% if user.is_authenticated %}
