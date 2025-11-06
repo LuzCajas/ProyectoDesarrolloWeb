@@ -22,10 +22,21 @@
                 <h2>Nuevo Producto</h2>
             </header>
             <p>Por favor, llena todos los campos que se muestran a continuación, luego haz click en <b>Guardar</b>.</p>
+ 
+            <style>
+            input[name="precio"] {
+                color: #ffffff;              /* Texto blanco */
+                background-color: #303450;   /* Fondo oscuro */
+                border: 1px solid #303450;
+                border-radius: 5px;
+                padding: 10px;
+                width: 100%;
+            }
+            </style>
 
             <!-- Formulario centrado -->
             <div class="d-flex justify-content-center">
-                <form method="POST" style="width: 100%; max-width: 600px;">
+                <form method="POST" enctype="multipart/form-data" style="width: 100%; max-width: 600px;">
                     {% csrf_token %}
 
                     <!-- Campo Nombre -->
@@ -46,31 +57,25 @@
                         {{ form.precio }}
                     </div>
 
-                    <style>
-                    input[name="precio"] {
-                        color: #ffffff;              /* Texto blanco */
-                        background-color: #303450;   /* Fondo oscuro */
-                        border: 1px solid #303450;
-                        border-radius: 5px;
-                        padding: 10px;
-                        width: 100%;
-                    }
-                    </style>
-
-                    <!-- Campo Categoria -->
+                    <!-- Campo Categoría -->
                     <div class="mb-3">
-                        <label for="{{ form.categoria.id_for_label }}" class="form-label">Categoria</label>
+                        <label for="{{ form.categoria.id_for_label }}" class="form-label">Categoría</label>
                         {{ form.categoria }}
                     </div>
 
+                    <!-- Campo Imagen -->
                     <div class="mb-3">
-                        <h2> </h2>
+                        <label for="{{ form.imagen.id_for_label }}" class="form-label">Imagen del producto</label>
+                        {{ form.imagen }}
+                    </div>
+
+                    <div class="mb-3">
                         <button type="submit" class="btn btn-primary w-100">Guardar</button>
                     </div>
                     <div class="d-flex justify-content-center mt-3">
-                        <h2> </h2>
                         <a href="{% url 'home:homeapp' %}" class="btn btn-sm btn-warning">Cancelar</a>
                     </div>
+                </form>
                 </form>
             </div>
         </div>

@@ -39,6 +39,12 @@ class CrearProducto(LoginRequiredMixin, UserPassesTestMixin, CreateView):
     form_class = ProductoForm
     login_url = '/login/'  # Redirige a tu pantalla de login personalizada
 
+    def form_valid(self, form):
+        # Guarda la imagen correctamente
+        self.object = form.save(commit=False)
+        self.object.save()
+        return super().form_valid(form)
+
     def get_success_url(self):
         categoria_id = self.object.categoria.id
         return f"{reverse('modulos:modulosapp')}?categoria={categoria_id}"

@@ -3,6 +3,8 @@ from django.urls import path, include
 from Apps.home import views
 from .views import modulosView, ListarProductos, detalleView, CrearProducto, EditarProducto
 from Apps.modulos import views
+from django.conf import settings
+from django.conf.urls.static import static
 
 app_name = 'modulos'
 

@@ -10,7 +10,7 @@
 									<header class="major">
 										<h1>{{ producto.nombre }}</h1>
 									</header>
-									<span class="image main"><img src="{% static 'images/pic11.jpg' %}" alt="" /></span>
+									<span class="image main"><img src="{{ producto.imagen.url }}" alt="" /></span>
                                     <p>{{ producto.descripcion }}</p>
                                     <h2>Precio: Q{{ producto.precio }}</h2>
 									<ul class="actions">
