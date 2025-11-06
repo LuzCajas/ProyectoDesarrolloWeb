@@ -64,9 +64,11 @@
 
             <div class="text-center mt-4 mb-4" style="padding: 0 60px;">
                 <div class="d-flex justify-content-center gap-3 flex-wrap">
+                    {% if request.user.is_staff %}
                     <ul class="actions mb-0">
                         <li><a href="{% url 'modulos:cambiar_estado_pedido' pedido.id %}" class="button">Cambiar Estado</a></li>
                     </ul>
+                    {% endif %}
                     <ul class="actions mb-0">
                         <li><a href="{% url 'modulos:historial_pedidos' %}" class="button">Volver</a></li>
                     </ul>
